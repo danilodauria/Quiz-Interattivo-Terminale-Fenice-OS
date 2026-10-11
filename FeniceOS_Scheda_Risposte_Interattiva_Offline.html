@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Il Grande Quiz dell'Informatica — Scheda Risposte Interattiva</title>
+<meta name="description" content="Scheda risposte interattiva e stampabile per le 264 domande de Il Grande Quiz dell'Informatica. Un progetto FeniceOS di Danilo D'Auria.">
+<style>:root{
+  --navy:#1b3a4b; --navy2:#12262f;
+  --orange:#d9752f; --gold:#c78a2e;
+  --green:#3f7a4f; --green2:#e7f0e3;
+  --blue:#2f6b8f; --blue2:#e3edf3;
+  --purple:#7a4f9e; --purple2:#ece2f3;
+  --orange2:#fbead9; --gold2:#faf0dc;
+  --cream:#fbf5ea; --ink:#201c18; --inkmute:#5b5148;
+  --bg:#fdfaf3; --card:#ffffff; --line:#e7dcc4;
+  --ok:#2f7a4a; --bad:#b53c3c;
+  --radius:14px;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{
+  margin:0; padding:0; background:var(--bg); color:var(--ink);
+  font-family:"Segoe UI","DejaVu Sans","Liberation Sans",Arial,sans-serif;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{font-family:Georgia,"DejaVu Serif","Liberation Serif",serif; margin:0; color:var(--navy); font-weight:bold;}
+p{margin:0 0 .7em 0;}
+button{font-family:inherit; cursor:pointer;}
+.hidden{display:none !important;}
+.sr-only{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0);}
+
+/* ---------- topbar ---------- */
+#topbar{
+  position:sticky; top:0; z-index:80;
+  background:var(--navy); color:#fff;
+  display:flex; align-items:center; flex-wrap:wrap;
+  padding:.6rem 1rem; box-shadow:0 2px 8px rgba(0,0,0,.15);
+}
+#topbar .brand{display:flex; align-items:center; margin-right:1rem;}
+#topbar .brand svg{display:block; flex:0 0 auto; margin-right:.6rem;}
+#topbar .brand-text{line-height:1.15;}
+#topbar .brand-text .k{display:block; font-size:.6rem; letter-spacing:.12em; text-transform:uppercase; color:var(--gold); font-weight:bold;}
+#topbar .brand-text .t{display:block; font-family:Georgia,"DejaVu Serif",serif; font-weight:bold; font-size:1rem;}
+#offlineTag{font-size:.7rem; color:#cfe4d1; background:rgba(63,122,79,.35); border:1px solid rgba(255,255,255,.25); border-radius:20px; padding:.25rem .65rem; white-space:nowrap; margin-right:1rem;}
+.progress-pill{display:flex; align-items:center; margin-right:1rem; min-width:150px;}
+.ppbar{width:110px; height:9px; background:rgba(255,255,255,.22); border-radius:20px; overflow:hidden; margin-right:.5rem;}
+#ppfill{width:0%; height:100%; background:var(--orange); transition:width .2s ease;}
+#ppcount{font-size:.78rem; white-space:nowrap; font-weight:bold;}
+.toolbar{display:flex; margin-left:auto;}
+.tbtn{
+  background:var(--orange); color:#fff; border:none; border-radius:10px;
+  padding:.55rem .9rem; font-size:.88rem; font-weight:bold; min-height:40px; margin-left:.5rem;
+  white-space:nowrap;
+}
+.tbtn:hover{filter:brightness(1.07);}
+.tbtn.ghost{background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.4);}
+.tbtn.danger{background:var(--bad);}
+
+/* ---------- layout ---------- */
+main{max-width:900px; margin:0 auto; padding:0 1.1rem 4rem 1.1rem;}
+.card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:1.2rem 1.3rem; box-shadow:0 2px 8px rgba(0,0,0,.04); margin:0 0 1.3rem 0;}
+.card h2{font-size:1.15rem; display:flex; align-items:center; margin-bottom:.8rem;}
+.card h2 .ic{margin-right:.5rem; font-size:1.15em;}
+
+/* ---------- hero ---------- */
+.hero{position:relative; overflow:hidden; border-radius:0 0 22px 22px; background:linear-gradient(180deg,var(--orange2),var(--cream)); padding:1.8rem 1.2rem 1.6rem 1.2rem; margin-bottom:1.3rem; text-align:center;}
+.hero-bg{position:absolute; right:-40px; top:-40px; opacity:.10; pointer-events:none;}
+.hero-inner{position:relative; z-index:2; max-width:640px; margin:0 auto;}
+.hero-inner > svg{display:block; margin:0 auto .6rem auto;}
+.kicker{display:block; font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; color:var(--orange); font-weight:bold; margin-bottom:.5rem;}
+.hero h1{font-size:1.85rem; margin-bottom:.6rem;}
+.lead{color:var(--inkmute); font-size:1.02rem;}
+.byline{color:var(--navy); font-size:.88rem; margin-top:.7rem; font-style:italic;}
+
+/* ---------- forms ---------- */
+.info-grid{display:flex; flex-wrap:wrap;}
+.field{display:flex; flex-direction:column; width:calc(50% - .5rem); margin:0 1rem 1rem 0;}
+.field:nth-child(2n){margin-right:0;}
+.field.wide{width:100%; margin-right:0;}
+.field span{font-size:.8rem; font-weight:bold; color:var(--navy); margin-bottom:.3rem;}
+.field input, .field select, .field textarea{
+  border:1.5px solid var(--line); border-radius:9px; padding:.55rem .7rem; font-size:.98rem;
+  font-family:inherit; color:var(--ink); background:#fffdf8;
+}
+.field input:focus, .field select:focus, .field textarea:focus{outline:2px solid var(--orange); outline-offset:1px; border-color:var(--orange);}
+.field textarea{resize:vertical;}
+
+.instr-list{margin:0 0 1rem 0; padding-left:1.3rem;}
+.instr-list li{margin-bottom:.4rem; font-size:.95rem;}
+.legend{display:flex; flex-wrap:wrap; align-items:center; border-top:1px dashed var(--line); padding-top:.8rem;}
+.legend-item{display:flex; align-items:center; font-size:.88rem; color:var(--inkmute); margin-right:1.4rem;}
+.legend-item .chk{margin-right:.4rem;}
+
+/* ---------- checkbox / radio visual ---------- */
+.chk{
+  width:19px; height:19px; border:2px solid var(--ink); border-radius:4px; display:inline-flex;
+  align-items:center; justify-content:center; flex:0 0 auto; background:#fff;
+}
+.chk.is-checked{background:var(--ink); border-color:var(--ink);}
+.chk.is-checked::after{content:"\2713"; color:#fff; font-size:13px; font-weight:bold; line-height:1;}
+
+/* ---------- part nav ---------- */
+.partnav{display:flex; flex-wrap:wrap; margin:0 0 1.3rem 0;}
+.partnav a{
+  background:var(--card); border:1.5px solid var(--line); border-radius:20px; padding:.4rem .9rem;
+  font-size:.82rem; font-weight:bold; color:var(--navy); text-decoration:none; margin:0 .5rem .5rem 0;
+}
+.partnav a:hover{border-color:var(--orange); color:var(--orange);}
+
+/* ---------- quiz sections ---------- */
+.part-banner{
+  color:#fff; border-radius:12px; padding:1rem 1.2rem; margin:0 0 .9rem 0; display:flex; align-items:baseline; flex-wrap:wrap;
+}
+.part-banner .roman{font-family:Georgia,serif; font-size:1.6rem; font-weight:bold; opacity:.6; margin-right:.7rem;}
+.part-banner .ptitle{font-family:Georgia,serif; font-size:1.15rem; font-weight:bold;}
+.part-banner .pmeta{width:100%; font-size:.8rem; opacity:.9; margin-top:.25rem;}
+
+.chgroup{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:1rem 1.1rem; margin-bottom:1rem;}
+.chgroup-head{font-size:1.02rem; color:var(--navy); font-family:Georgia,serif; font-weight:bold; margin-bottom:.7rem; display:flex; align-items:center;}
+.chgroup-head .chnum{
+  display:inline-flex; align-items:center; justify-content:center; width:1.9rem; height:1.9rem; border-radius:50%;
+  background:var(--navy); color:#fff; font-size:.85rem; margin-right:.6rem; flex:0 0 auto;
+}
+
+.lvl-block{margin-bottom:.9rem;}
+.lvl-block:last-child{margin-bottom:0;}
+.lvl-label{
+  display:inline-block; font-size:.72rem; font-weight:bold; text-transform:uppercase; letter-spacing:.05em;
+  border-radius:20px; padding:.18rem .7rem; margin-bottom:.5rem;
+}
+.lvl-label.base{background:var(--green2); color:var(--green);}
+.lvl-label.intermedio{background:var(--gold2); color:#8a6416;}
+.lvl-label.esperto{background:var(--orange2); color:var(--orange);}
+
+.qrow{display:flex; align-items:flex-start; padding:.5rem 0; border-top:1px solid var(--line);}
+.lvl-block .qrow:first-of-type{border-top:none;}
+.qrow .qbadge{
+  flex:0 0 auto; min-width:2.1rem; height:1.7rem; padding:0 .3rem; border-radius:7px; background:var(--navy);
+  color:#fff; font-size:.76rem; font-weight:bold; display:flex; align-items:center; justify-content:center;
+  margin-right:.7rem; margin-top:.1rem; font-family:Georgia,serif; white-space:nowrap;
+}
+.qrow .qbody{flex:1 1 auto; min-width:0;}
+.qrow .qstem{font-size:.94rem; color:var(--ink); margin-bottom:.5rem;}
+.qrow .opts{display:flex; flex-wrap:wrap;}
+.opt{
+  display:flex; align-items:center; margin:0 1.1rem .35rem 0; cursor:pointer; -webkit-tap-highlight-color:transparent;
+  padding:.15rem .3rem .15rem 0; border-radius:8px;
+}
+.opt:hover{background:var(--bg);}
+.opt input{position:absolute; opacity:0; width:1px; height:1px;}
+.opt .olabel{font-size:.92rem; color:var(--ink); margin-left:.45rem;}
+.opt.checked .olabel{color:var(--navy); font-weight:bold;}
+.opt input:focus-visible + .chk{outline:2px solid var(--orange); outline-offset:2px;}
+.opt input:checked + .chk{background:var(--ink); border-color:var(--ink);}
+.opt input:checked + .chk::after{content:"\2713"; color:#fff; font-size:13px; font-weight:bold; line-height:1;}
+
+/* ---------- score card ---------- */
+.score-note{font-size:.86rem; color:var(--inkmute);}
+.score-grid{display:flex; flex-wrap:wrap; margin-bottom:1rem;}
+.sfield{display:flex; flex-direction:column; width:calc(25% - .6rem); margin:0 .8rem .8rem 0;}
+.sfield:last-child{margin-right:0;}
+.sfield span{font-size:.76rem; font-weight:bold; color:var(--navy); margin-bottom:.3rem;}
+.sfield span i{font-style:normal; color:var(--inkmute); font-weight:normal;}
+.sfield input{border:1.5px solid var(--line); border-radius:9px; padding:.5rem .6rem; font-size:1rem; text-align:center; font-weight:bold; color:var(--navy);}
+.sfield.total input{background:var(--orange2); border-color:var(--orange);}
+.sign-grid{display:flex; flex-wrap:wrap; border-top:1px dashed var(--line); padding-top:1rem;}
+.sign-grid .field{width:calc(50% - .5rem);}
+
+/* ---------- footer ---------- */
+.foot{text-align:center; color:var(--inkmute); font-size:.8rem; padding:1rem 1rem 2rem 1rem; opacity:.85;}
+
+/* ---------- toast ---------- */
+#toast{
+  position:fixed; bottom:1.2rem; left:50%; transform:translateX(-50%) translateY(120%);
+  background:var(--navy); color:#fff; padding:.7rem 1.2rem; border-radius:30px; font-size:.88rem;
+  box-shadow:0 4px 14px rgba(0,0,0,.25); transition:transform .25s ease; z-index:100; max-width:90vw; text-align:center;
+}
+#toast.show{transform:translateX(-50%) translateY(0);}
+
+/* ---------- confirm overlay ---------- */
+.overlay{position:fixed; inset:0; background:rgba(20,16,10,.55); display:flex; align-items:center; justify-content:center; z-index:200; padding:1rem;}
+.overlay-box{background:#fff; border-radius:var(--radius); padding:1.4rem 1.5rem; max-width:380px; box-shadow:0 8px 30px rgba(0,0,0,.3);}
+.overlay-box h3{font-size:1.1rem; margin-bottom:.6rem;}
+.overlay-box p{font-size:.9rem; color:var(--inkmute);}
+.overlay-actions{display:flex; justify-content:flex-end; margin-top:1rem;}
+.overlay-actions .tbtn{color:#fff;}
+.overlay-actions .tbtn.ghost{color:var(--navy); background:var(--bg); border:1.5px solid var(--line);}
+
+@media (max-width:620px){
+  .field, .field:nth-child(2n){width:100%; margin-right:0;}
+  .sfield{width:calc(50% - .5rem);}
+  .sign-grid .field{width:100%;}
+  #topbar{gap:.4rem;}
+  .progress-pill{order:3; width:100%; margin:.4rem 0 0 0;}
+  .hero h1{font-size:1.5rem;}
+}
+
+/* ================= PRINT ================= */
+@media print{
+  *{-webkit-print-color-adjust:exact; print-color-adjust:exact;}
+  #topbar, .toolbar, #toast, .overlay, .partnav{display:none !important;}
+  body{background:#fff;}
+  main{max-width:none; padding:0 4mm;}
+  .hero{border-radius:0; background:#fff; padding:6mm 2mm 4mm 2mm; margin-bottom:4mm;}
+  .hero-bg{display:none;}
+  .card, .chgroup{box-shadow:none; border:1px solid #ccc; break-inside:avoid; page-break-inside:avoid;}
+  .part-banner{break-before:page; page-break-before:always; break-inside:avoid;}
+  .part-banner:first-of-type{break-before:auto; page-break-before:avoid;}
+  .qrow{break-inside:avoid; page-break-inside:avoid;}
+  .opt:hover{background:none;}
+  a[href]{color:inherit; text-decoration:none;}
+}
+</style>
+</head>
+<body>
+
+<div id="topbar">
+  <div class="brand">
+    <svg width="38" height="38" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="58" fill="#f7cd8a"/><g fill="none" stroke="#c9812f" stroke-width="4" stroke-linecap="round"><path d="M60 40 L20 30 M60 40 L18 45 M60 40 L20 60 M60 40 L22 75 M60 40 L28 88"/><path d="M60 40 L100 30 M60 40 L102 45 M60 40 L100 60 M60 40 L98 75 M60 40 L92 88"/></g><path d="M60 34 C50 34 44 44 44 56 C44 72 52 84 60 96 C68 84 76 72 76 56 C76 44 70 34 60 34 Z" fill="#e8973c"/><path d="M60 30 L54 22 L60 18 L66 22 Z" fill="#e8973c"/><circle cx="57" cy="30" r="1.6" fill="#1b3a4b"/></svg>
+    <div class="brand-text">
+      <span class="k">Un progetto FeniceOS</span>
+      <span class="t">Scheda Risposte Interattiva</span>
+    </div>
+  </div>
+  <span id="offlineTag">&#9679; Funziona offline, nel tuo browser</span>
+  <div id="progressPill" class="progress-pill" aria-live="polite">
+    <div class="ppbar"><div id="ppfill"></div></div>
+    <span id="ppcount">0 / 264 risposte</span>
+  </div>
+  <div class="toolbar">
+    <button id="btnExport" class="tbtn" type="button">&#128190; Esporta risposte</button>
+    <button id="btnPrint" class="tbtn ghost" type="button">&#128424;&#65039; Stampa</button>
+    <button id="btnClear" class="tbtn ghost" type="button">&#10227; Svuota scheda</button>
+  </div>
+</div>
+
+<main id="main">
+
+  <header class="hero">
+    <div class="hero-bg" aria-hidden="true"><svg width="260" height="260" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="58" fill="#f7cd8a"/><g fill="none" stroke="#c9812f" stroke-width="4" stroke-linecap="round"><path d="M60 40 L20 30 M60 40 L18 45 M60 40 L20 60 M60 40 L22 75 M60 40 L28 88"/><path d="M60 40 L100 30 M60 40 L102 45 M60 40 L100 60 M60 40 L98 75 M60 40 L92 88"/></g><path d="M60 34 C50 34 44 44 44 56 C44 72 52 84 60 96 C68 84 76 72 76 56 C76 44 70 34 60 34 Z" fill="#e8973c"/><path d="M60 30 L54 22 L60 18 L66 22 Z" fill="#e8973c"/><circle cx="57" cy="30" r="1.6" fill="#1b3a4b"/></svg></div>
+    <div class="hero-inner">
+      <svg width="72" height="72" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="58" fill="#f7cd8a"/><g fill="none" stroke="#c9812f" stroke-width="4" stroke-linecap="round"><path d="M60 40 L20 30 M60 40 L18 45 M60 40 L20 60 M60 40 L22 75 M60 40 L28 88"/><path d="M60 40 L100 30 M60 40 L102 45 M60 40 L100 60 M60 40 L98 75 M60 40 L92 88"/></g><path d="M60 34 C50 34 44 44 44 56 C44 72 52 84 60 96 C68 84 76 72 76 56 C76 44 70 34 60 34 Z" fill="#e8973c"/><path d="M60 30 L54 22 L60 18 L66 22 Z" fill="#e8973c"/><circle cx="57" cy="30" r="1.6" fill="#1b3a4b"/></svg>
+      <span class="kicker">IL GRANDE QUIZ DELL'INFORMATICA &middot; UN PROGETTO FENICEOS</span>
+      <h1>Scheda Risposte Interattiva</h1>
+      <p class="lead">Seleziona le risposte con il mouse o il tocco, compila i tuoi dati da tastiera. Puoi salvare il lavoro nel browser e stampare la scheda quando vuoi.</p>
+      <p class="byline">A cura di <b>Danilo D'Auria</b> &mdash; ideatore e sviluppatore di FeniceOS, autore di &laquo;Tecnologia Gentile: Informatica Sostenibile&raquo;</p>
+    </div>
+  </header>
+
+  <section class="card info-card" aria-labelledby="infoTitle">
+    <h2 id="infoTitle"><span class="ic">&#128100;</span> Dati del partecipante</h2>
+    <div class="info-grid">
+      <label class="field"><span>Nome e Cognome</span><input type="text" id="fNome" autocomplete="off"></label>
+      <label class="field"><span>Data di compilazione</span><input type="date" id="fData"></label>
+      <label class="field"><span>Centro / Scuola / Associazione</span><input type="text" id="fCentro" autocomplete="off"></label>
+      <label class="field"><span>Gruppo o classe</span><input type="text" id="fGruppo" autocomplete="off"></label>
+      <label class="field"><span>Livello del percorso seguito</span>
+        <select id="fLivello">
+          <option value="">— seleziona —</option>
+          <option>Base</option>
+          <option>Intermedio</option>
+          <option>Esperto</option>
+          <option>Misto / non specificato</option>
+        </select>
+      </label>
+      <label class="field wide"><span>Note</span><textarea id="fNote" rows="2"></textarea></label>
+    </div>
+  </section>
+
+  <section class="card instr-card" aria-labelledby="instrTitle">
+    <h2 id="instrTitle"><span class="ic">&#8505;&#65039;</span> Come si compila</h2>
+    <ol class="instr-list">
+      <li>Per ogni domanda, clicca (o tocca) la casella accanto alla risposta che ritieni corretta: A, B, C, D oppure Vero/Falso.</li>
+      <li>Puoi cambiare risposta in ogni momento: la nuova selezione sostituisce quella precedente.</li>
+      <li>Il tuo lavoro viene salvato automaticamente in questo browser: puoi chiudere la pagina e ritrovarlo com'era.</li>
+      <li>A compilazione ultimata usa il pulsante <b>Esporta risposte</b>: scarica un piccolo file .json con le tue risposte, da inviare a chi corregge il quiz (non contiene le soluzioni). Se preferisci la carta, usa invece <b>Stampa</b>.</li>
+    </ol>
+    <div class="legend">
+      <span class="legend-item"><span class="chk" aria-hidden="true"></span> non selezionata</span>
+      <span class="legend-item"><span class="chk is-checked" aria-hidden="true"></span> selezionata</span>
+    </div>
+  </section>
+
+  <nav class="partnav" id="partNav" aria-label="Vai alla parte"></nav>
+
+  <div id="quizRoot"></div>
+
+  <section class="card score-card" aria-labelledby="scoreTitle">
+    <h2 id="scoreTitle"><span class="ic">&#9989;</span> Riepilogo punteggio</h2>
+    <p class="score-note">Se le risposte vengono esportate e corrette con lo strumento "Correttore Automatico", questi campi non servono compilarli a mano: il punteggio verrà calcolato automaticamente. Restano utili come riepilogo scritto, o per una correzione manuale.</p>
+    <div class="score-grid">
+      <label class="sfield"><span>Livello Base <i>(/88)</i></span><input type="text" id="sBase" inputmode="numeric"></label>
+      <label class="sfield"><span>Livello Intermedio <i>(/88)</i></span><input type="text" id="sInter" inputmode="numeric"></label>
+      <label class="sfield"><span>Livello Esperto <i>(/88)</i></span><input type="text" id="sEsperto" inputmode="numeric"></label>
+      <label class="sfield total"><span>Totale <i>(/264)</i></span><input type="text" id="sTotale" inputmode="numeric"></label>
+    </div>
+    <div class="sign-grid">
+      <label class="field"><span>Corretto da</span><input type="text" id="fCorrettore" autocomplete="off"></label>
+      <label class="field"><span>Data correzione</span><input type="date" id="fDataCorrezione"></label>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <p>&laquo;Il Grande Quiz dell'Informatica&raquo; &mdash; un progetto FeniceOS ideato e curato da Danilo D'Auria. Scheda pensata per centri anziani, scuole e centri sociali: puoi ristamparla o ricompilarla liberamente per ogni partecipante.</p>
+  </footer>
+
+</main>
+
+<div id="toast" role="status" aria-live="polite"></div>
+<div id="confirmOverlay" class="overlay hidden" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
+  <div class="overlay-box">
+    <h3 id="confirmTitle">Svuotare la scheda?</h3>
+    <p>Tutte le risposte selezionate e i dati inseriti verranno cancellati da questo browser. L'operazione non si può annullare.</p>
+    <div class="overlay-actions">
+      <button id="confirmCancel" class="tbtn ghost" type="button">Annulla</button>
+      <button id="confirmOk" class="tbtn danger" type="button">Svuota tutto</button>
+    </div>
+  </div>
+</div>
+
+<script id="quiz-data" type="application/json">{"title":"Il Grande Quiz dell'Informatica","subtitle":"Domande e Risposte per l'Alfabetizzazione Digitale, dalle Basi ai Livelli Esperti","author":"Danilo D'Auria","total":264,"parts":[{"num":1,"roman":"I","title":"Le Basi e la Storia dell'Informatica","desc":"Dal primo approccio al quiz alla storia del computer, dall'hardware ai sistemi operativi: le fondamenta di ogni percorso di alfabetizzazione digitale.","chapters":[{"num":2,"title":"Storia dell'informatica: dalle origini a oggi"},{"num":3,"title":"Hardware e componenti del computer"},{"num":4,"title":"Sistemi operativi e file system"}]},{"num":2,"roman":"II","title":"Software, Rete e Comunicazione","desc":"Programmi, browser, email, messaggistica, social e sicurezza informatica: gli strumenti del vivere digitale quotidiano, messi alla prova domanda dopo domanda.","chapters":[{"num":5,"title":"Software, applicazioni e produttività"},{"num":6,"title":"Internet e navigazione"},{"num":7,"title":"Comunicazione digitale e social"},{"num":8,"title":"Sicurezza informatica e privacy"}]},{"num":3,"roman":"III","title":"Cloud, Mobile e Intelligenza Artificiale","desc":"Smartphone, tablet, servizi cloud e intelligenza artificiale: il presente e il futuro prossimo dell'informatica, spiegati e verificati con il quiz.","chapters":[{"num":9,"title":"Cloud, backup e dispositivi mobili"},{"num":10,"title":"Intelligenza artificiale: presente e futuro"}]},{"num":4,"roman":"IV","title":"Sostenibilità, Etica e FeniceOS","desc":"I principi di Tecnologia Gentile applicati alla pratica quotidiana, e un capitolo dedicato a FeniceOS, il progetto da cui tutto è partito.","chapters":[{"num":11,"title":"Economia circolare ed etica del digitale"},{"num":12,"title":"FeniceOS e il mondo Linux: uso consapevole"}]}],"questions":[{"n":1,"chapter":2,"section":"Livello Base","type":"mc"},{"n":2,"chapter":2,"section":"Livello Base","type":"vf"},{"n":3,"chapter":2,"section":"Livello Base","type":"mc"},{"n":4,"chapter":2,"section":"Livello Base","type":"mc"},{"n":5,"chapter":2,"section":"Livello Base","type":"vf"},{"n":6,"chapter":2,"section":"Livello Base","type":"mc"},{"n":7,"chapter":2,"section":"Livello Base","type":"mc"},{"n":8,"chapter":2,"section":"Livello Base","type":"vf"},{"n":9,"chapter":2,"section":"Livello Intermedio","type":"mc"},{"n":10,"chapter":2,"section":"Livello Intermedio","type":"mc"},{"n":11,"chapter":2,"section":"Livello Intermedio","type":"vf"},{"n":12,"chapter":2,"section":"Livello Intermedio","type":"mc"},{"n":13,"chapter":2,"section":"Livello Intermedio","type":"mc"},{"n":14,"chapter":2,"section":"Livello Intermedio","type":"vf"},{"n":15,"chapter":2,"section":"Livello Intermedio","type":"mc"},{"n":16,"chapter":2,"section":"Livello Intermedio","type":"mc"},{"n":17,"chapter":2,"section":"Livello Esperto","type":"mc"},{"n":18,"chapter":2,"section":"Livello Esperto","type":"vf"},{"n":19,"chapter":2,"section":"Livello Esperto","type":"mc"},{"n":20,"chapter":2,"section":"Livello Esperto","type":"mc"},{"n":21,"chapter":2,"section":"Livello Esperto","type":"vf"},{"n":22,"chapter":2,"section":"Livello Esperto","type":"mc"},{"n":23,"chapter":2,"section":"Livello Esperto","type":"mc"},{"n":24,"chapter":2,"section":"Livello Esperto","type":"vf"},{"n":25,"chapter":3,"section":"Livello Base","type":"mc"},{"n":26,"chapter":3,"section":"Livello Base","type":"vf"},{"n":27,"chapter":3,"section":"Livello Base","type":"mc"},{"n":28,"chapter":3,"section":"Livello Base","type":"mc"},{"n":29,"chapter":3,"section":"Livello Base","type":"vf"},{"n":30,"chapter":3,"section":"Livello Base","type":"mc"},{"n":31,"chapter":3,"section":"Livello Base","type":"mc"},{"n":32,"chapter":3,"section":"Livello Base","type":"vf"},{"n":33,"chapter":3,"section":"Livello Intermedio","type":"mc"},{"n":34,"chapter":3,"section":"Livello Intermedio","type":"mc"},{"n":35,"chapter":3,"section":"Livello Intermedio","type":"vf"},{"n":36,"chapter":3,"section":"Livello Intermedio","type":"mc"},{"n":37,"chapter":3,"section":"Livello Intermedio","type":"mc"},{"n":38,"chapter":3,"section":"Livello Intermedio","type":"vf"},{"n":39,"chapter":3,"section":"Livello Intermedio","type":"mc"},{"n":40,"chapter":3,"section":"Livello Intermedio","type":"mc"},{"n":41,"chapter":3,"section":"Livello Esperto","type":"mc"},{"n":42,"chapter":3,"section":"Livello Esperto","type":"mc"},{"n":43,"chapter":3,"section":"Livello Esperto","type":"vf"},{"n":44,"chapter":3,"section":"Livello Esperto","type":"mc"},{"n":45,"chapter":3,"section":"Livello Esperto","type":"mc"},{"n":46,"chapter":3,"section":"Livello Esperto","type":"vf"},{"n":47,"chapter":3,"section":"Livello Esperto","type":"mc"},{"n":48,"chapter":3,"section":"Livello Esperto","type":"mc"},{"n":49,"chapter":4,"section":"Livello Base","type":"mc"},{"n":50,"chapter":4,"section":"Livello Base","type":"vf"},{"n":51,"chapter":4,"section":"Livello Base","type":"mc"},{"n":52,"chapter":4,"section":"Livello Base","type":"mc"},{"n":53,"chapter":4,"section":"Livello Base","type":"vf"},{"n":54,"chapter":4,"section":"Livello Base","type":"mc"},{"n":55,"chapter":4,"section":"Livello Base","type":"mc"},{"n":56,"chapter":4,"section":"Livello Base","type":"vf"},{"n":57,"chapter":4,"section":"Livello Intermedio","type":"mc"},{"n":58,"chapter":4,"section":"Livello Intermedio","type":"mc"},{"n":59,"chapter":4,"section":"Livello Intermedio","type":"vf"},{"n":60,"chapter":4,"section":"Livello Intermedio","type":"mc"},{"n":61,"chapter":4,"section":"Livello Intermedio","type":"mc"},{"n":62,"chapter":4,"section":"Livello Intermedio","type":"vf"},{"n":63,"chapter":4,"section":"Livello Intermedio","type":"mc"},{"n":64,"chapter":4,"section":"Livello Intermedio","type":"mc"},{"n":65,"chapter":4,"section":"Livello Esperto","type":"mc"},{"n":66,"chapter":4,"section":"Livello Esperto","type":"mc"},{"n":67,"chapter":4,"section":"Livello Esperto","type":"vf"},{"n":68,"chapter":4,"section":"Livello Esperto","type":"mc"},{"n":69,"chapter":4,"section":"Livello Esperto","type":"mc"},{"n":70,"chapter":4,"section":"Livello Esperto","type":"vf"},{"n":71,"chapter":4,"section":"Livello Esperto","type":"mc"},{"n":72,"chapter":4,"section":"Livello Esperto","type":"mc"},{"n":73,"chapter":5,"section":"Livello Base","type":"mc"},{"n":74,"chapter":5,"section":"Livello Base","type":"vf"},{"n":75,"chapter":5,"section":"Livello Base","type":"mc"},{"n":76,"chapter":5,"section":"Livello Base","type":"mc"},{"n":77,"chapter":5,"section":"Livello Base","type":"vf"},{"n":78,"chapter":5,"section":"Livello Base","type":"mc"},{"n":79,"chapter":5,"section":"Livello Base","type":"mc"},{"n":80,"chapter":5,"section":"Livello Base","type":"vf"},{"n":81,"chapter":5,"section":"Livello Intermedio","type":"mc"},{"n":82,"chapter":5,"section":"Livello Intermedio","type":"vf"},{"n":83,"chapter":5,"section":"Livello Intermedio","type":"mc"},{"n":84,"chapter":5,"section":"Livello Intermedio","type":"mc"},{"n":85,"chapter":5,"section":"Livello Intermedio","type":"vf"},{"n":86,"chapter":5,"section":"Livello Intermedio","type":"mc"},{"n":87,"chapter":5,"section":"Livello Intermedio","type":"mc"},{"n":88,"chapter":5,"section":"Livello Intermedio","type":"vf"},{"n":89,"chapter":5,"section":"Livello Esperto","type":"mc"},{"n":90,"chapter":5,"section":"Livello Esperto","type":"mc"},{"n":91,"chapter":5,"section":"Livello Esperto","type":"vf"},{"n":92,"chapter":5,"section":"Livello Esperto","type":"mc"},{"n":93,"chapter":5,"section":"Livello Esperto","type":"mc"},{"n":94,"chapter":5,"section":"Livello Esperto","type":"vf"},{"n":95,"chapter":5,"section":"Livello Esperto","type":"mc"},{"n":96,"chapter":5,"section":"Livello Esperto","type":"mc"},{"n":97,"chapter":6,"section":"Livello Base","type":"mc"},{"n":98,"chapter":6,"section":"Livello Base","type":"vf"},{"n":99,"chapter":6,"section":"Livello Base","type":"mc"},{"n":100,"chapter":6,"section":"Livello Base","type":"mc"},{"n":101,"chapter":6,"section":"Livello Base","type":"vf"},{"n":102,"chapter":6,"section":"Livello Base","type":"mc"},{"n":103,"chapter":6,"section":"Livello Base","type":"mc"},{"n":104,"chapter":6,"section":"Livello Base","type":"vf"},{"n":105,"chapter":6,"section":"Livello Intermedio","type":"mc"},{"n":106,"chapter":6,"section":"Livello Intermedio","type":"vf"},{"n":107,"chapter":6,"section":"Livello Intermedio","type":"mc"},{"n":108,"chapter":6,"section":"Livello Intermedio","type":"mc"},{"n":109,"chapter":6,"section":"Livello Intermedio","type":"vf"},{"n":110,"chapter":6,"section":"Livello Intermedio","type":"mc"},{"n":111,"chapter":6,"section":"Livello Intermedio","type":"mc"},{"n":112,"chapter":6,"section":"Livello Intermedio","type":"vf"},{"n":113,"chapter":6,"section":"Livello Esperto","type":"mc"},{"n":114,"chapter":6,"section":"Livello Esperto","type":"vf"},{"n":115,"chapter":6,"section":"Livello Esperto","type":"mc"},{"n":116,"chapter":6,"section":"Livello Esperto","type":"mc"},{"n":117,"chapter":6,"section":"Livello Esperto","type":"vf"},{"n":118,"chapter":6,"section":"Livello Esperto","type":"mc"},{"n":119,"chapter":6,"section":"Livello Esperto","type":"mc"},{"n":120,"chapter":6,"section":"Livello Esperto","type":"vf"},{"n":121,"chapter":7,"section":"Livello Base","type":"mc"},{"n":122,"chapter":7,"section":"Livello Base","type":"vf"},{"n":123,"chapter":7,"section":"Livello Base","type":"mc"},{"n":124,"chapter":7,"section":"Livello Base","type":"mc"},{"n":125,"chapter":7,"section":"Livello Base","type":"vf"},{"n":126,"chapter":7,"section":"Livello Base","type":"mc"},{"n":127,"chapter":7,"section":"Livello Base","type":"mc"},{"n":128,"chapter":7,"section":"Livello Base","type":"vf"},{"n":129,"chapter":7,"section":"Livello Intermedio","type":"mc"},{"n":130,"chapter":7,"section":"Livello Intermedio","type":"vf"},{"n":131,"chapter":7,"section":"Livello Intermedio","type":"mc"},{"n":132,"chapter":7,"section":"Livello Intermedio","type":"mc"},{"n":133,"chapter":7,"section":"Livello Intermedio","type":"vf"},{"n":134,"chapter":7,"section":"Livello Intermedio","type":"mc"},{"n":135,"chapter":7,"section":"Livello Intermedio","type":"mc"},{"n":136,"chapter":7,"section":"Livello Intermedio","type":"vf"},{"n":137,"chapter":7,"section":"Livello Esperto","type":"mc"},{"n":138,"chapter":7,"section":"Livello Esperto","type":"vf"},{"n":139,"chapter":7,"section":"Livello Esperto","type":"mc"},{"n":140,"chapter":7,"section":"Livello Esperto","type":"mc"},{"n":141,"chapter":7,"section":"Livello Esperto","type":"vf"},{"n":142,"chapter":7,"section":"Livello Esperto","type":"mc"},{"n":143,"chapter":7,"section":"Livello Esperto","type":"mc"},{"n":144,"chapter":7,"section":"Livello Esperto","type":"vf"},{"n":145,"chapter":8,"section":"Livello Base","type":"mc"},{"n":146,"chapter":8,"section":"Livello Base","type":"vf"},{"n":147,"chapter":8,"section":"Livello Base","type":"mc"},{"n":148,"chapter":8,"section":"Livello Base","type":"mc"},{"n":149,"chapter":8,"section":"Livello Base","type":"vf"},{"n":150,"chapter":8,"section":"Livello Base","type":"mc"},{"n":151,"chapter":8,"section":"Livello Base","type":"mc"},{"n":152,"chapter":8,"section":"Livello Base","type":"vf"},{"n":153,"chapter":8,"section":"Livello Intermedio","type":"mc"},{"n":154,"chapter":8,"section":"Livello Intermedio","type":"vf"},{"n":155,"chapter":8,"section":"Livello Intermedio","type":"mc"},{"n":156,"chapter":8,"section":"Livello Intermedio","type":"mc"},{"n":157,"chapter":8,"section":"Livello Intermedio","type":"vf"},{"n":158,"chapter":8,"section":"Livello Intermedio","type":"mc"},{"n":159,"chapter":8,"section":"Livello Intermedio","type":"mc"},{"n":160,"chapter":8,"section":"Livello Intermedio","type":"vf"},{"n":161,"chapter":8,"section":"Livello Esperto","type":"mc"},{"n":162,"chapter":8,"section":"Livello Esperto","type":"vf"},{"n":163,"chapter":8,"section":"Livello Esperto","type":"mc"},{"n":164,"chapter":8,"section":"Livello Esperto","type":"mc"},{"n":165,"chapter":8,"section":"Livello Esperto","type":"vf"},{"n":166,"chapter":8,"section":"Livello Esperto","type":"mc"},{"n":167,"chapter":8,"section":"Livello Esperto","type":"mc"},{"n":168,"chapter":8,"section":"Livello Esperto","type":"vf"},{"n":169,"chapter":9,"section":"Livello Base","type":"mc"},{"n":170,"chapter":9,"section":"Livello Base","type":"vf"},{"n":171,"chapter":9,"section":"Livello Base","type":"mc"},{"n":172,"chapter":9,"section":"Livello Base","type":"mc"},{"n":173,"chapter":9,"section":"Livello Base","type":"vf"},{"n":174,"chapter":9,"section":"Livello Base","type":"mc"},{"n":175,"chapter":9,"section":"Livello Base","type":"mc"},{"n":176,"chapter":9,"section":"Livello Base","type":"vf"},{"n":177,"chapter":9,"section":"Livello Intermedio","type":"mc"},{"n":178,"chapter":9,"section":"Livello Intermedio","type":"vf"},{"n":179,"chapter":9,"section":"Livello Intermedio","type":"mc"},{"n":180,"chapter":9,"section":"Livello Intermedio","type":"mc"},{"n":181,"chapter":9,"section":"Livello Intermedio","type":"vf"},{"n":182,"chapter":9,"section":"Livello Intermedio","type":"mc"},{"n":183,"chapter":9,"section":"Livello Intermedio","type":"mc"},{"n":184,"chapter":9,"section":"Livello Intermedio","type":"vf"},{"n":185,"chapter":9,"section":"Livello Esperto","type":"mc"},{"n":186,"chapter":9,"section":"Livello Esperto","type":"vf"},{"n":187,"chapter":9,"section":"Livello Esperto","type":"mc"},{"n":188,"chapter":9,"section":"Livello Esperto","type":"mc"},{"n":189,"chapter":9,"section":"Livello Esperto","type":"vf"},{"n":190,"chapter":9,"section":"Livello Esperto","type":"mc"},{"n":191,"chapter":9,"section":"Livello Esperto","type":"mc"},{"n":192,"chapter":9,"section":"Livello Esperto","type":"vf"},{"n":193,"chapter":10,"section":"Livello Base","type":"mc"},{"n":194,"chapter":10,"section":"Livello Base","type":"vf"},{"n":195,"chapter":10,"section":"Livello Base","type":"mc"},{"n":196,"chapter":10,"section":"Livello Base","type":"mc"},{"n":197,"chapter":10,"section":"Livello Base","type":"vf"},{"n":198,"chapter":10,"section":"Livello Base","type":"mc"},{"n":199,"chapter":10,"section":"Livello Base","type":"mc"},{"n":200,"chapter":10,"section":"Livello Base","type":"vf"},{"n":201,"chapter":10,"section":"Livello Intermedio","type":"mc"},{"n":202,"chapter":10,"section":"Livello Intermedio","type":"vf"},{"n":203,"chapter":10,"section":"Livello Intermedio","type":"mc"},{"n":204,"chapter":10,"section":"Livello Intermedio","type":"mc"},{"n":205,"chapter":10,"section":"Livello Intermedio","type":"vf"},{"n":206,"chapter":10,"section":"Livello Intermedio","type":"mc"},{"n":207,"chapter":10,"section":"Livello Intermedio","type":"mc"},{"n":208,"chapter":10,"section":"Livello Intermedio","type":"vf"},{"n":209,"chapter":10,"section":"Livello Esperto","type":"mc"},{"n":210,"chapter":10,"section":"Livello Esperto","type":"vf"},{"n":211,"chapter":10,"section":"Livello Esperto","type":"mc"},{"n":212,"chapter":10,"section":"Livello Esperto","type":"mc"},{"n":213,"chapter":10,"section":"Livello Esperto","type":"vf"},{"n":214,"chapter":10,"section":"Livello Esperto","type":"mc"},{"n":215,"chapter":10,"section":"Livello Esperto","type":"mc"},{"n":216,"chapter":10,"section":"Livello Esperto","type":"vf"},{"n":217,"chapter":11,"section":"Livello Base","type":"mc"},{"n":218,"chapter":11,"section":"Livello Base","type":"vf"},{"n":219,"chapter":11,"section":"Livello Base","type":"mc"},{"n":220,"chapter":11,"section":"Livello Base","type":"mc"},{"n":221,"chapter":11,"section":"Livello Base","type":"vf"},{"n":222,"chapter":11,"section":"Livello Base","type":"mc"},{"n":223,"chapter":11,"section":"Livello Base","type":"mc"},{"n":224,"chapter":11,"section":"Livello Base","type":"vf"},{"n":225,"chapter":11,"section":"Livello Intermedio","type":"mc"},{"n":226,"chapter":11,"section":"Livello Intermedio","type":"vf"},{"n":227,"chapter":11,"section":"Livello Intermedio","type":"mc"},{"n":228,"chapter":11,"section":"Livello Intermedio","type":"mc"},{"n":229,"chapter":11,"section":"Livello Intermedio","type":"vf"},{"n":230,"chapter":11,"section":"Livello Intermedio","type":"mc"},{"n":231,"chapter":11,"section":"Livello Intermedio","type":"mc"},{"n":232,"chapter":11,"section":"Livello Intermedio","type":"vf"},{"n":233,"chapter":11,"section":"Livello Esperto","type":"mc"},{"n":234,"chapter":11,"section":"Livello Esperto","type":"vf"},{"n":235,"chapter":11,"section":"Livello Esperto","type":"mc"},{"n":236,"chapter":11,"section":"Livello Esperto","type":"mc"},{"n":237,"chapter":11,"section":"Livello Esperto","type":"vf"},{"n":238,"chapter":11,"section":"Livello Esperto","type":"mc"},{"n":239,"chapter":11,"section":"Livello Esperto","type":"mc"},{"n":240,"chapter":11,"section":"Livello Esperto","type":"vf"},{"n":241,"chapter":12,"section":"Livello Base","type":"mc"},{"n":242,"chapter":12,"section":"Livello Base","type":"vf"},{"n":243,"chapter":12,"section":"Livello Base","type":"mc"},{"n":244,"chapter":12,"section":"Livello Base","type":"mc"},{"n":245,"chapter":12,"section":"Livello Base","type":"vf"},{"n":246,"chapter":12,"section":"Livello Base","type":"mc"},{"n":247,"chapter":12,"section":"Livello Base","type":"vf"},{"n":248,"chapter":12,"section":"Livello Base","type":"mc"},{"n":249,"chapter":12,"section":"Livello Intermedio","type":"mc"},{"n":250,"chapter":12,"section":"Livello Intermedio","type":"vf"},{"n":251,"chapter":12,"section":"Livello Intermedio","type":"mc"},{"n":252,"chapter":12,"section":"Livello Intermedio","type":"mc"},{"n":253,"chapter":12,"section":"Livello Intermedio","type":"vf"},{"n":254,"chapter":12,"section":"Livello Intermedio","type":"mc"},{"n":255,"chapter":12,"section":"Livello Intermedio","type":"vf"},{"n":256,"chapter":12,"section":"Livello Intermedio","type":"mc"},{"n":257,"chapter":12,"section":"Livello Esperto","type":"mc"},{"n":258,"chapter":12,"section":"Livello Esperto","type":"vf"},{"n":259,"chapter":12,"section":"Livello Esperto","type":"mc"},{"n":260,"chapter":12,"section":"Livello Esperto","type":"mc"},{"n":261,"chapter":12,"section":"Livello Esperto","type":"vf"},{"n":262,"chapter":12,"section":"Livello Esperto","type":"mc"},{"n":263,"chapter":12,"section":"Livello Esperto","type":"mc"},{"n":264,"chapter":12,"section":"Livello Esperto","type":"vf"}]}</script>
+<script>(function(){
+"use strict";
+
+var STORAGE_KEY = "feniceos_grande_quiz_scheda_v1";
+
+var DATA;
+try{
+  DATA = JSON.parse(document.getElementById("quiz-data").textContent);
+}catch(e){
+  DATA = {total:0, parts:[], questions:[]};
+}
+
+var PART_COLOR = {1:"#3f7a4f", 2:"#d9752f", 3:"#2f6b8f", 4:"#7a4f9e", 5:"#c78a2e"};
+var LEVEL_SHORT = {"Livello Base":"Base", "Livello Intermedio":"Intermedio", "Livello Esperto":"Esperto"};
+var LEVEL_CLASS = {"Livello Base":"base", "Livello Intermedio":"intermedio", "Livello Esperto":"esperto"};
+var LEVEL_ORDER = ["Livello Base", "Livello Intermedio", "Livello Esperto"];
+
+function esc(s){
+  return String(s).replace(/[&<>"']/g, function(c){
+    return {"&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"}[c];
+  });
+}
+
+var qByChapter = {};
+(DATA.questions || []).forEach(function(q){
+  (qByChapter[q.chapter] = qByChapter[q.chapter] || []).push(q);
+});
+Object.keys(qByChapter).forEach(function(k){
+  qByChapter[k].sort(function(a, b){ return a.n - b.n; });
+});
+
+function optionsFor(q){
+  return q.type === "vf" ? ["Vero", "Falso"] : ["A", "B", "C", "D"];
+}
+
+function qrowHtml(q){
+  var opts = optionsFor(q);
+  var optsHtml = opts.map(function(v){
+    return '<label class="opt" data-q="' + q.n + '" data-v="' + esc(v) + '">'
+      + '<input type="radio" name="q_' + q.n + '" value="' + esc(v) + '" aria-label="Risposta ' + esc(v) + ' per la domanda D' + q.n + '">'
+      + '<span class="chk" aria-hidden="true"></span>'
+      + '<span class="olabel">' + esc(v) + "</span>"
+      + "</label>";
+  }).join("");
+  return '<div class="qrow" id="qrow-' + q.n + '" role="group" aria-label="Domanda D' + q.n + '">'
+    + '<span class="qbadge">D' + q.n + "</span>"
+    + '<span class="opts">' + optsHtml + "</span>"
+    + "</div>";
+}
+
+function chapterGroupHtml(ch){
+  var qs = qByChapter[ch.num] || [];
+  var byLevel = {};
+  qs.forEach(function(q){ (byLevel[q.section] = byLevel[q.section] || []).push(q); });
+  var levelsHtml = LEVEL_ORDER.filter(function(l){ return byLevel[l]; }).map(function(l){
+    var rows = byLevel[l].map(qrowHtml).join("");
+    return '<div class="lvl-block"><span class="lvl-label ' + LEVEL_CLASS[l] + '">' + LEVEL_SHORT[l] + "</span>" + rows + "</div>";
+  }).join("");
+  return '<div class="chgroup"><div class="chgroup-head"><span class="chnum">' + ch.num + "</span>" + esc(ch.title) + "</div>" + levelsHtml + "</div>";
+}
+
+function partSectionHtml(p){
+  var chaptersHtml = p.chapters.map(chapterGroupHtml).join("");
+  var qcount = p.chapters.length * 24;
+  var color = PART_COLOR[p.num] || "#1b3a4b";
+  return '<section id="part' + p.num + '">'
+    + '<div class="part-banner" style="background:' + color + '">'
+    + '<span class="roman">' + esc(p.roman) + "</span>"
+    + '<span class="ptitle">' + esc(p.title) + "</span>"
+    + '<span class="pmeta">' + p.chapters.length + " capitoli &middot; " + qcount + " domande</span>"
+    + "</div>"
+    + chaptersHtml
+    + "</section>";
+}
+
+function buildQuiz(){
+  var root = document.getElementById("quizRoot");
+  var nav = document.getElementById("partNav");
+  var partsHtml = "", navHtml = "";
+  (DATA.parts || []).forEach(function(p){
+    partsHtml += partSectionHtml(p);
+    navHtml += '<a href="#part' + p.num + '">Parte ' + esc(p.roman) + "</a>";
+  });
+  root.innerHTML = partsHtml;
+  nav.innerHTML = navHtml;
+}
+
+buildQuiz();
+
+/* ---------------- stato e salvataggio ---------------- */
+
+var state = {info:{}, answers:{}};
+
+function loadState(){
+  try{
+    var raw = localStorage.getItem(STORAGE_KEY);
+    if(raw){
+      var parsed = JSON.parse(raw);
+      if(parsed && typeof parsed === "object"){
+        state.info = parsed.info || {};
+        state.answers = parsed.answers || {};
+      }
+    }
+  }catch(e){
+    /* localStorage non disponibile (modalita' privata, storage pieno, ecc.): si continua senza salvataggio persistente */
+  }
+}
+
+function saveState(){
+  try{
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }catch(e){
+    /* ignorato */
+  }
+}
+
+var INFO_FIELDS = {
+  fNome:"nome", fData:"data", fCentro:"centro", fGruppo:"gruppo", fLivello:"livello", fNote:"note",
+  sBase:"sBase", sInter:"sInter", sEsperto:"sEsperto", sTotale:"sTotale",
+  fCorrettore:"correttore", fDataCorrezione:"dataCorrezione"
+};
+
+function applyState(){
+  Object.keys(INFO_FIELDS).forEach(function(id){
+    var el = document.getElementById(id);
+    var key = INFO_FIELDS[id];
+    if(el && state.info[key] !== undefined){
+      el.value = state.info[key];
+    }
+  });
+  Object.keys(state.answers).forEach(function(n){
+    var v = state.answers[n];
+    var input = document.querySelector('input[name="q_' + n + '"][value="' + v + '"]');
+    if(input){
+      input.checked = true;
+      var opt = input.closest(".opt");
+      if(opt) opt.classList.add("checked");
+    }
+  });
+  updateProgress();
+}
+
+function updateProgress(){
+  var total = DATA.total || (DATA.questions || []).length;
+  var answered = Object.keys(state.answers).length;
+  var countEl = document.getElementById("ppcount");
+  var fillEl = document.getElementById("ppfill");
+  if(countEl) countEl.textContent = answered + " / " + total + " risposte";
+  if(fillEl) fillEl.style.width = (total ? Math.round((answered / total) * 100) : 0) + "%";
+}
+
+var toastTimer = null;
+function showToast(msg){
+  var t = document.getElementById("toast");
+  if(!t) return;
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function(){ t.classList.remove("show"); }, 2200);
+}
+
+/* ---------------- ascoltatori ---------------- */
+
+var quizRoot = document.getElementById("quizRoot");
+if(quizRoot){
+  quizRoot.addEventListener("change", function(e){
+    var t = e.target;
+    if(!t || t.type !== "radio") return;
+    var label = t.closest(".opt");
+    if(!label) return;
+    var n = label.getAttribute("data-q");
+    var v = label.getAttribute("data-v");
+    state.answers[n] = v;
+    var qrow = t.closest(".qrow");
+    if(qrow){
+      qrow.querySelectorAll(".opt").forEach(function(o){ o.classList.remove("checked"); });
+    }
+    label.classList.add("checked");
+    saveState();
+    updateProgress();
+  });
+}
+
+Object.keys(INFO_FIELDS).forEach(function(id){
+  var el = document.getElementById(id);
+  if(!el) return;
+  var evt = (el.tagName === "SELECT") ? "change" : "input";
+  el.addEventListener(evt, function(){
+    state.info[INFO_FIELDS[id]] = el.value;
+    saveState();
+  });
+});
+
+var btnPrint = document.getElementById("btnPrint");
+if(btnPrint){
+  btnPrint.addEventListener("click", function(){ window.print(); });
+}
+
+function slugify(s){
+  return String(s || "")
+    .normalize("NFD").replace(/[̀-ͯ]/g, "")
+    .replace(/[^a-zA-Z0-9]+/g, "_")
+    .replace(/^_+|_+$/g, "");
+}
+
+function exportAnswers(){
+  var payload = {
+    tipo: "feniceos_grande_quiz_risposte",
+    versione: 1,
+    titolo: (DATA && DATA.title) || "Il Grande Quiz dell'Informatica",
+    totaleDomande: (DATA && DATA.total) || 264,
+    esportatoIl: new Date().toISOString(),
+    info: state.info,
+    answers: state.answers
+  };
+  var json = JSON.stringify(payload, null, 2);
+  var blob = new Blob([json], {type: "application/json"});
+  var url = URL.createObjectURL(blob);
+  var namePart = slugify(state.info.nome) || "scheda_risposte";
+  var datePart = slugify(state.info.data) || new Date().toISOString().slice(0, 10);
+  var filename = "GrandeQuiz_Risposte_" + namePart + "_" + datePart + ".json";
+  var a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+  var answered = Object.keys(state.answers).length;
+  showToast("Risposte esportate (" + answered + " su " + ((DATA && DATA.total) || 264) + "): " + filename);
+}
+
+var btnExport = document.getElementById("btnExport");
+if(btnExport){
+  btnExport.addEventListener("click", exportAnswers);
+}
+
+var overlay = document.getElementById("confirmOverlay");
+var btnClear = document.getElementById("btnClear");
+var confirmCancel = document.getElementById("confirmCancel");
+var confirmOk = document.getElementById("confirmOk");
+
+if(btnClear && overlay){
+  btnClear.addEventListener("click", function(){ overlay.classList.remove("hidden"); });
+}
+if(confirmCancel && overlay){
+  confirmCancel.addEventListener("click", function(){ overlay.classList.add("hidden"); });
+}
+if(overlay){
+  overlay.addEventListener("click", function(e){
+    if(e.target === overlay) overlay.classList.add("hidden");
+  });
+}
+if(confirmOk && overlay){
+  confirmOk.addEventListener("click", function(){
+    state = {info:{}, answers:{}};
+    try{ localStorage.removeItem(STORAGE_KEY); }catch(e){ /* ignorato */ }
+    document.querySelectorAll('#quizRoot input[type="radio"]').forEach(function(i){ i.checked = false; });
+    document.querySelectorAll("#quizRoot .opt.checked").forEach(function(o){ o.classList.remove("checked"); });
+    document.querySelectorAll(".info-card input, .info-card select, .info-card textarea").forEach(function(el){ el.value = ""; });
+    document.querySelectorAll(".score-card input").forEach(function(el){ el.value = ""; });
+    overlay.classList.add("hidden");
+    updateProgress();
+    showToast("Scheda svuotata");
+  });
+}
+
+/* ---------------- avvio ---------------- */
+
+loadState();
+applyState();
+
+var hasSavedWork = Object.keys(state.answers).length > 0
+  || Object.keys(state.info).some(function(k){ return !!state.info[k]; });
+if(hasSavedWork){
+  showToast("Bozza precedente ripristinata da questo browser");
+}
+
+})();
+</script>
+</body>
+</html>
